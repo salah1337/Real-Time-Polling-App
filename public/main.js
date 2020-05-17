@@ -23,16 +23,19 @@ fetch('/poll')
 .then(data => {
     const votes = data.votes;
     const totalVotes = votes.length;
-    
-})
 
-const chartContainer = document.querySelector('#chartContainer');
+    voteCounts = votes.reduce((acc, vote) => (
+        (acc[vote.os] = (acc[vote.os] || 0) + parseInt(vote.points)), acc),
+        {}
+    );
+
+    const chartContainer = document.querySelector('#chartContainer');
 
 let dataPoints = [
-    { label: 'Windows', y: 0 },
-    { label: 'MacOS', y: 0 },
-    { label: 'Linux', y: 0 },
-    { label: 'Other', y: 0 }
+    { label: 'Windows', y: voteCounts.Windows },
+    { label: 'MacOS', y: voteCounts.MacOS },
+    { label: 'Linux', y: voteCounts.Linux },
+    { label: 'Other', y: voteCounts.Other }
 ];
 
 if(chartContainer) {
@@ -40,7 +43,7 @@ if(chartContainer) {
         animationEnabled: true,
         theme: 'theme1',
         title: {
-            text: 'OS Restults'
+            text: `Total votes: ${totalVotes}`
         },
         data: [
             {
@@ -69,4 +72,5 @@ if(chartContainer) {
     })
     });
 };
+})
 
