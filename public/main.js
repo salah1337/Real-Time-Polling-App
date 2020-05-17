@@ -18,6 +18,14 @@ form.addEventListener('submit', (e)=>{
     e.preventDefault();
 });
 
+fetch('/poll')
+.then(res => res.json())
+.then(data => {
+    const votes = data.votes;
+    const totalVotes = votes.length;
+    
+})
+
 const chartContainer = document.querySelector('#chartContainer');
 
 let dataPoints = [

@@ -13,7 +13,10 @@ var pusher = new Pusher({
 });
 
 router.get('/', (req, res) => {
-    res.send('k');
+    Vote.find().then(votes => res.json({
+        success: true,
+        votes: votes
+    }))
 });
 
 router.post('/', (req, res) => {
@@ -22,16 +25,20 @@ router.post('/', (req, res) => {
         points: 1
     }
 
-    new Vote( )
+    new Vote(newVote).save().then(vote => {
 
-    pusher.trigger('os-poll', 'os-vote', {
-        points: 1,
-        os: req.body.os
-    });
-    return res.json({
-        success: true,
-        message: 'Thanks for voting.'
+        pusher.trigger('os-poll', 'os-vote', {
+            points: parseInt(vote.points),
+            os: vote.os
+        });
+        return res.json({
+            success: true,
+            message: 'Thanks for voting.'
+        })
+
     })
+
+    
 });
 
 
