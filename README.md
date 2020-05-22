@@ -7,7 +7,7 @@ Simple Real Time Polling App
 <pre>in poll.js change the connection info to your own </pre>
 <br/>
 
-<pre> First run </pre>
+First run <br/>
 
 ``` npm install ``` <br/>
 
