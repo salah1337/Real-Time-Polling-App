@@ -57,7 +57,7 @@ if(chartContainer) {
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
-    var pusher = new Pusher('39a0914e65feead5b9ed', {
+    var pusher = new Pusher('yourinfo', {
     cluster: 'eu'
     });
 
